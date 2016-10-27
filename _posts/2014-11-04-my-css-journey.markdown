@@ -1,4 +1,6 @@
+---
 title: My CSS journey
+layout: post
 tags:
   - CSS
   - HTML
@@ -11,7 +13,7 @@ date: 2014-11-04 22:25:40
 I've started writing my first lines of CSS more than 10 years ago. It's been quite a learning process. I remember the times when having one class for one element was a norm. I even remember the times when IE7 was considered new and kind of great.
 
 ### The early days
-
+i
 CSS was the easiest way to go for me back in the day, since it was the simplest one. No loops, no variables, just describing how your HTML elements look. <!--more-->Redundant, yes, but that didn't seem like a problem. First attempts were mostly trial and error. And that went on for quite some time. In the beginning I had some styling inline, but that changed over time. Anyway, I got skilled at it pretty quickly.
 
 Good knowledge in CSS made me a little lazy in other areas. I usually avoided extending my knowledge with internal workings of CMSes I've had been using. Why? Because I could do most of what I've wanted with only HTML and CSS. And do it quick. Custom data and other custom functionality was another question.
@@ -29,8 +31,10 @@ At the beginning it seemed as a dreadful task. There were countless classes, up 
 The technique required us to develop a naming convention. For example, all text related classes had a "t" prefix before (_tsize11, tsize12, tsize13, tgrey, tred, tblue, tblue2, tbold, tcenter,_ etc.).
 
 Such technique might give you a headache if not used properly. One of the most important things here is not to mix utility classes to your modular CSS selectors (just create a new one instead). For example:
-<pre>.catalog .tsize.tcenter .title {} /* hardly maintainable */
-.catalog .catalog-head .title {} /* is fine */</pre>
+{% highlight css %}
+.catalog .tsize.tcenter .title {} /* hardly maintainable */
+.catalog .catalog-head .title {} /* is fine */
+{% endhighlight %}
 When I've started working with my current company two years ago, they've had a freelancer who used to write selectors similar to a bad example above, thus when I've started coding using this principle in one of the projects I was quickly ordered not to use it.
 
 Overall, this was a great technique for websites and apps with a clear design guideline. One thing to look out for is not to overdo with the utility classes. Identify and reuse in small chunks, otherwise it will lose it's purpose.
@@ -42,12 +46,14 @@ Overall, this was a great technique for websites and apps with a clear design gu
 The idea was to create a few generalised content blocks and have lots of utility classes (w250, w300, relative, etc.). I ended up extending main block for every new piece of different content. There were shared styles (mostly common ones such as position, background, font size, etc.) across those blocks, but it's not worth doing. Separate it to a different block instead for better maintainability.
 
 When I look back, I think I could have avoided a great deal of issues simply by avoiding to extend current blocks with modifier classes. Here's an example of what I mean:
-<pre>/* maintaining hell */
+{% highlight css %}
+/* maintaining hell */
 .b-container.blogpost { }
 
 /* a better approach */
 .b-container { }
-.blogpost { }</pre>
+.blogpost { }
+{% endhighlight %}
 Overall, I guess it was a matter of poorly implemented techniques. And the fact that they were mixed up. Lesson learned.
 
 ### BEM

@@ -1,4 +1,6 @@
+---
 title: Leaving architecture and becoming a web developer
+layout: post
 tags:
   - architecture
   - stories

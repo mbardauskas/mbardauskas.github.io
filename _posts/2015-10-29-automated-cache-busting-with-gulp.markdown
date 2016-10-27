@@ -1,4 +1,6 @@
+---
 title: Automated cache busting with Gulp
+layout: post
 categories:
   - Development
 date: 2015-10-29 20:46:58
@@ -14,16 +16,16 @@ You probably want most of your image and other resources to be cached, so the us
 #### Configuring web server
 
 The easy part is configuring your apache web server through `.htaccess`:
-```apacheconf
+{% highlight apacheconf %}
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.+)\.(\d+)\.(bmp|css|cur|gif|ico|jpe?g|js|png|svgz?|webp|webmanifest)$ $1.$3 [L]
 </IfModule>
-```
+{% endhighlight %}
 
 Or the same thing with IIS `web.config`:
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <system.webServer>
@@ -40,12 +42,12 @@ Or the same thing with IIS `web.config`:
         </rewrite>
     </system.webServer>
 </configuration>
-```
+{% endhighlight %}
 
 #### Renaming files with gulp build step
 
 There are ways to implement this into the build step. Usually we incorporate it with bundling tasks (eg. <a href="http://requirejs.org/">requirejs</a> and <a href="https://www.npmjs.com/package/gulp-cssmin">gulp-cssmin</a>). The following is the most trivial task to handle filename revving with Gulp:
-```js
+{% highlight js %}
 // gulpfile.js
 var gulp = require('gulp');
 var rename = require('gulp-rename');
@@ -62,7 +64,7 @@ gulp.task('bust-cache', function() {
 });
 
 gulp.task('default', ['bust-cache'], function() {});
-```
+{% endhighlight %}
 
 Note that this can be easily achieved with <a href="https://github.com/hollandben/grunt-cache-bust">Grunt cache busting tool</a> or any other task runner. <a href="https://www.npmjs.com/package/gulp-buster">Gulp also has full plugins to bust cache</a>, though sometimes you end up with something completely custom just because you can. 
 

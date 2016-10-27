@@ -1,4 +1,6 @@
+---
 title: Hello World v2
+layout: post
 date: 2015-05-29 11:42:41
 tags:
   - hexo

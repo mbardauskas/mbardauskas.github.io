@@ -1,5 +1,6 @@
-title: 'Reading '
-JavaScript: 'the Good Parts""'
+---
+title: "Reading JavaScript: the Good Parts"
+layout: post
 tags:
   - JavaScript
   - opinion
