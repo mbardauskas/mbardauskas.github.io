@@ -1,4 +1,6 @@
+---
 title: Web workers
+layout: post
 tags:
   - JavaScript
 id: 12

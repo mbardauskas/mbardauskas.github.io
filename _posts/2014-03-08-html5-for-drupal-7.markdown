@@ -1,4 +1,6 @@
+---
 title: HTML5 for Drupal 7
+layout: post
 tags:
   - Drupal
   - PHP
@@ -13,55 +15,67 @@ date: 2014-03-08 14:22:23
 ## Fixing HTML5 markup for Drupal 7
 
 First of all you have to make changes to _html.tpl.php_ file, basically you should change only 3 lines (doctype, html, head):
-<pre>&lt;!DOCTYPE html&gt;
-&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="&lt;?php print $language-&gt;language; ?&gt;" lang="&lt;?php print $language-&gt;language; ?&gt;" dir="&lt;?php print $language-&gt;dir; ?&gt;" &lt;?php print $rdf_namespaces; ?&gt;&gt;
-&lt;head&gt;
+{% highlight php %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" <?php print $rdf_namespaces; ?>>
+<head>
 ....
-&lt;/head&gt;</pre>
+</head>
+{% endhighlight %}
 In addition to this, you have to add a few functions to your _template.php_ file. The main purpose of the code below code is to convert the XHTML syntax (xmlns:name=”http://url”) into HTML5 (prefix=”name: url …”) syntax.
-<pre>/**
+
+{% highlight php %}
+<?php
+/**
  * Implements hook_preprocess_html()
  */
-function themename_preprocess_html(&amp;$vars) {
+function themename_preprocess_html(&$vars) {
   $prefixes = array();
   $namespaces = explode("\n", trim($vars['rdf_namespaces']));
   foreach ($namespaces as $name) {
     list($key,$url) = explode('=', $name, 2);
     list($xml,$space) = explode(':',$key, 2);
     $url = trim($url, '"');
-    if (!empty($space) &amp;&amp; !empty($url)) {
+    if (!empty($space) && !empty($url)) {
       $prefixes[] = $space . ': ' . $url;
     }
   }
   $prefix = implode(" ", $prefixes);
   $vars['rdf_namespaces'] = 'prefix="' . $prefix . '"';
-}</pre>
+}
+{% endhighlight %}
 RDF Extensions module sometimes generates blank attributes which cause validation errors, the code below will fix this:
-<pre>/**
+{% highlight php %}
+<?php
+/**
  * Implements hook_preprocess_node()
  */
-function themename_preprocess_node(&amp;$vars) {
-  foreach($vars['title_attributes_array'] as $key =&gt; $value) {
+function themename_preprocess_node(&$vars) {
+  foreach($vars['title_attributes_array'] as $key => $value) {
     if(empty($value)) {
       unset($vars['title_attributes_array'][$key]);
     }
   }
-}</pre>
+}
+{% endhighlight %}
 Another problem is with entities, Drupal sometimes generates duplicate "classes" and empty "typeof" attributes. The code below merges classes arrays into one, removes duplicate and empty attributes.
-<pre>/**
+{% highlight php %}
+<?php
+/**
  * Implements hook_preprocess_entity()
  */
-function themename_preprocess_entity(&amp;$vars) {
-  if (!empty($vars['classes_array']) &amp;&amp; !empty($vars['attributes_array']['class'])) {
+function themename_preprocess_entity(&$vars) {
+  if (!empty($vars['classes_array']) && !empty($vars['attributes_array']['class'])) {
     $vars['classes_array'] = array_merge($vars['classes_array'], $vars['attributes_array']['class']);
     unset($vars['attributes_array']['class']);
   }
-  foreach($vars['attributes_array'] as $key =&gt; $value) {
+  foreach($vars['attributes_array'] as $key => $value) {
     if(empty($value)) {
       unset($vars['attributes_array'][$key]);
     }
   }
-}</pre>
+}
+{% endhighlight %}
 Check with [W3 Validator](http://validator.w3.org/) and you should be all set.
 
 ### Conclusions

@@ -1,4 +1,6 @@
+---
 title: Sleep and scheduling experiment results
+layout: post
 id: 49
 categories:
   - self improvement

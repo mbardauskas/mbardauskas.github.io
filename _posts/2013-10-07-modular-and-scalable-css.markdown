@@ -1,4 +1,6 @@
+---
 title: Modular and scalable CSS
+layout: post
 tags:
   - CSS
 id: 24

@@ -1,4 +1,6 @@
+---
 title: 'Code complete: Part I'
+layout: post
 tags:
   - Opinions
   - Reading

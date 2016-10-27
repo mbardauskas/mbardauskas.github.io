@@ -1,4 +1,6 @@
+---
 title: Pixel perfect designs using overlay images
+layout: post
 tags:
   - CSS
   - HTML

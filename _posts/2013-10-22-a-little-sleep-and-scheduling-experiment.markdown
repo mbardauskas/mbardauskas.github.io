@@ -1,4 +1,6 @@
+---
 title: A little sleep and scheduling experiment
+layout: post
 tags:
   - Experiments
   - Sleep
