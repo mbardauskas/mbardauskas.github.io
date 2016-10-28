@@ -1,0 +1,58 @@
+@import "mixins";
+
+$diameter: 23.5vh;
+$radius: $diameter/2;
+
+.master {
+	height: 0;
+}
+
+.master__name {
+	text-align: center;
+	color: #212121;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+	z-index: 4;
+}
+
+.master__circle {
+	background-color: #FFC107;
+	border-radius: $radius;
+	position: absolute;
+	height: $diameter;
+	width: $diameter;
+	margin-top: -$radius;
+	margin-left: -$radius;
+	@include GBoxShadow(4);
+	transition: width 0.2s, height 0.2s, box-shadow 0.2s, background-color 0.2s;
+	animation: shadow-change 2s infinite linear;
+	z-index: 5;
+	overflow: hidden;
+
+	img {
+		border-radius: $radius;
+		display: block;
+		max-width: 100%;
+		transform: scale(0);
+		transition: transform 0.1s;
+		position: relative;
+		z-index: 5;
+	}
+
+}
+
+
+@keyframes shadow-change {
+	0% {
+		@include GBoxShadow(3);
+	}
+	50% {
+		@include GBoxShadow(2)
+	}
+	100% {
+		@include GBoxShadow(3);
+	}
+}
