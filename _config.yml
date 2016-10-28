@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: studio36 blog
+title: studio36
 # email:
-description: "Martynas Bardauskas personal website"
+description: ""
 baseurl: "" # the subpath of your site, e.g. /blog
 # url: "http://example.com" # the base hostname & protocol for your site
 twitter_username: mbardauskas
@@ -24,3 +24,5 @@ github_username:  mbardauskas
 # Build settings
 markdown: kramdown
 theme: minima
+
+permalink: /blog/:categories/:year/:month/:day/:title/
