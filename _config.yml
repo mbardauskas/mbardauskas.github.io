@@ -24,5 +24,8 @@ github_username:  mbardauskas
 # Build settings
 markdown: kramdown
 theme: minima
+sass:
+  style: compact
+  sass_dir: _sass
 
 permalink: /blog/:categories/:year/:month/:day/:title/
